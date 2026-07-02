@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: main
+    tables:
+      - name: raw_census
+        description: "Raw FMCSA Company Census File, loaded daily from data.transportation.gov"

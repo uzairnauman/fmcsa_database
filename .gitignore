@@ -1,0 +1,6 @@
+env/
+data/
+*.duckdb
+*.csv
+logs/
+.DS_Store

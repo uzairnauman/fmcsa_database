@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: mart_carrier_search
+    description: "Active, authorized-for-hire trucking carriers, ready for search/filtering by location, fleet size, and equipment."
+    columns:
+      - name: dot_number
+        description: "Unique USDOT number identifying the carrier."
+        data_tests:
+          - unique
+          - not_null
+
+      - name: legal_name
+        description: "Legal business name of the carrier."
+        data_tests:
+          - not_null
+
+      - name: physical_state
+        description: "Two-letter state code of the carrier's physical address."
+
+      - name: physical_zip
+        description: "ZIP code of the carrier's physical address."
+
+      - name: fleetsize_range
+        description: "Human-readable bucketed range of total power units (e.g., '2-3', '401-550')."

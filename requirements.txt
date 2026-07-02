@@ -1,0 +1,7 @@
+requests
+dbt-duckdb
+duckdb
+requests
+streamlit
+pandas
+datetime
