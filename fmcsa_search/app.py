@@ -495,8 +495,7 @@ else:
     try:
         results = con.execute(query, params).df()
     except Exception as e:
-        st.error(f"Query failed: {e}")
-    results = pd.DataFrame()
+        results = pd.DataFrame() # Fallback to a completely empty dataframe structure
 
     # 1. Display the matching count strip (Only ONCE)
     st.markdown(f"""
@@ -541,9 +540,7 @@ if st.session_state.get("has_searched", False):
         st.subheader("🛠️ FinOps Telemetry")
         
         telemetry_payload = {
-    "Latency (seconds)": round(total_app_latency, 4),
-    "Results Returned": len(results),
-    "Search Query": company_name,
-    "State Filter": state,
-    "City Filter": city,
-}
+            "tracked_latency_seconds": round(total_app_latency, 4),
+            "estimated_bytes_per_row": 250
+        }
+        st.code(str(telemetry_payload), language="python")
