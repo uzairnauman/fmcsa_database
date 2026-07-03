@@ -522,13 +522,30 @@ else:
             use_container_width=True
         )
 
-    # --- TELEMETRY EXPANDER ---
-        with st.expander("🛠️ Developer FinOps Telemetry (Copy for Local Simulator)"):
-            st.markdown("Use these metrics to seed your local Python scalability model:")
-            
-            telemetry_payload = {
-                "tracked_latency_seconds": round(execution_seconds, 5),  # Keep this comma!
-                "rows_returned": rows_returned,
-                "estimated_bytes_scanned": estimated_bytes_read
-            }
-            st.code(str(telemetry_payload), language="python")
+    # === INITIALIZE TELEMETRY VARIABLES HERE ===
+    execution_seconds = 0.0
+    rows_returned = 0
+    estimated_bytes_read = 0
+    results = pd.DataFrame()
+    # ===========================================
+
+    # Fetch data safely into dataframes
+    try:
+        start_time = time.perf_counter() # Start timer right before execution
+        results = con.execute(query, params).df()
+        end_time = time.perf_counter()   # End timer right after execution
+        
+        # Calculate performance metrics if successful
+        execution_seconds = end_time - start_time
+        rows_returned = len(results)
+        estimated_bytes_read = rows_returned * 250
+    except Exception as e:
+        results = pd.DataFrame() # Fallback to a completely empty dataframe structure
+
+    # 1. Display the matching count strip (Only ONCE)
+    st.markdown(f"""
+    <div class="result-strip">
+        <span class="result-count">{total_count:,}</span>
+        <span class="result-label">matching entities found{' — viewing top 200 records' if total_count > 200 else ''}</span>
+    </div>
+    """, unsafe_allow_html=True)
