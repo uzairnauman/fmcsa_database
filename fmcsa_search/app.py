@@ -494,7 +494,7 @@ else:
     # Fetch data safely into dataframes
     try:
     results = con.execute(query, params).df()
-except Exception as e:
+    except Exception as e:
     st.error(f"Query failed: {e}")
     results = pd.DataFrame()
 
