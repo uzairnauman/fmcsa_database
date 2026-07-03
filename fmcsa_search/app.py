@@ -493,9 +493,10 @@ else:
     
     # Fetch data safely into dataframes
     try:
-        results = con.execute(query, params).df()
-    except Exception as e:
-        results = pd.DataFrame() # Fallback to a completely empty dataframe structure
+    results = con.execute(query, params).df()
+except Exception as e:
+    st.error(f"Query failed: {e}")
+    results = pd.DataFrame()
 
     # 1. Display the matching count strip (Only ONCE)
     st.markdown(f"""
