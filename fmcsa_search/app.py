@@ -493,9 +493,9 @@ else:
     
     # Fetch data safely into dataframes
     try:
-    results = con.execute(query, params).df()
+        results = con.execute(query, params).df()
     except Exception as e:
-    st.error(f"Query failed: {e}")
+        st.error(f"Query failed: {e}")
     results = pd.DataFrame()
 
     # 1. Display the matching count strip (Only ONCE)
