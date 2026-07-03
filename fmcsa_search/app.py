@@ -522,13 +522,12 @@ else:
             use_container_width=True
         )
 
-    # --- NEW TELEMETRY EXPANDER ---
-        # Renders the copy-pasteable data block for your local project environment
+    # --- TELEMETRY EXPANDER ---
         with st.expander("🛠️ Developer FinOps Telemetry (Copy for Local Simulator)"):
             st.markdown("Use these metrics to seed your local Python scalability model:")
             
             telemetry_payload = {
-                "tracked_latency_seconds": round(execution_seconds, 5),
+                "tracked_latency_seconds": round(execution_seconds, 5),  # Keep this comma!
                 "rows_returned": rows_returned,
                 "estimated_bytes_scanned": estimated_bytes_read
             }
