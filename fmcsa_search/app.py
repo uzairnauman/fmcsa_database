@@ -542,7 +542,7 @@ if st.session_state.get("has_searched", False):
         
         telemetry_payload = {
     "Latency (seconds)": round(total_app_latency, 4),
-    "Results Returned": len(df),
+    "Results Returned": len(results),
     "Search Query": company_name,
     "State Filter": state,
     "City Filter": city,
