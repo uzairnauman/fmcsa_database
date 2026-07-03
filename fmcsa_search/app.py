@@ -528,3 +528,19 @@ else:
             mime="text/csv",
             use_container_width=True
         )
+
+# --- ADD THIS TO THE ABSOLUTE BOTTOM OF YOUR APP.PY (NO INDENTATION) ---
+page_end_time = time.perf_counter()
+total_app_latency = page_end_time - st.session_state.page_start_time
+
+# Only show the telemetry box if the user has actually pressed search
+if st.session_state.get("has_searched", False):
+    st.markdown("---")
+    with st.sidebar: # This moves it out of your table UI entirely and sticks it in the sidebar!
+        st.subheader("🛠️ FinOps Telemetry")
+        
+        telemetry_payload = {
+            "tracked_latency_seconds": round(total_app_latency, 4),
+            "estimated_bytes_per_row": 250
+        }
+        st.code(str(telemetry_payload), language="python")
