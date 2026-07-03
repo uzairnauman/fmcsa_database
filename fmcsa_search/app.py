@@ -540,7 +540,9 @@ if st.session_state.get("has_searched", False):
         st.subheader("🛠️ FinOps Telemetry")
         
         telemetry_payload = {
-            "tracked_latency_seconds": round(total_app_latency, 4),
-            "estimated_bytes_per_row": 250
-        }
-        st.code(str(telemetry_payload), language="python")
+    "Latency (seconds)": round(total_app_latency, 4),
+    "Results Returned": len(df),
+    "Search Query": company_name,
+    "State Filter": state,
+    "City Filter": city,
+}
